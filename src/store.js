@@ -1,5 +1,5 @@
 import { observable } from 'mobx'
-import { AsyncStorage } from ' react-native'
+import { AsyncStorage } from 'react-native'
 
 class Store {
   @observable feeds
