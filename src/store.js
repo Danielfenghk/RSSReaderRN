@@ -3,7 +3,7 @@ import { AsyncStorage } from 'react-native'
 
 class Store {
   @observable feeds
-  @observable selectedFeeds
+  @observable selectedFeed
   @observable selectedEntry
 
   constructor() {
@@ -27,8 +27,12 @@ class Store {
     this._persistFeeds()
   }
 
+  selectFeed(feed) {
+    this.selectedFeed = feed
+  }
+
   selectEntry(entry) {
-    this.selectEntry = entry
+    this.selectedEntry = entry
   }
 }
 

@@ -28,7 +28,7 @@ export default class AddFeed extends Component {
         .then(feed => {
           addFeed(this.state.url, feed)
           this.setState({ loading: false })
-          this.props.navigation.gotBack()
+          this.props.navigation.goBack()
         })
         .catch(() => {
           Alert.alert('Could not find any rss feed with that url.')

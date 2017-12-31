@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { observer } from 'mobx-react/native'
-import { selectEntry, fetchFeed } from '../actions'
+import { selectEntry, fetchFeed, removeFeed } from '../actions'
 import { ActivityIndicator } from 'react-native'
 import {
   Button,
@@ -21,7 +21,7 @@ export default class FeedDetail extends Component {
   }
 
   static navigationOptions = props => ({
-    title: props.screenProps.store.selectedFeed.title,
+    title: props.screenProps.store.selectedFeed.entry[0].category.label,
     headerRight: (
       <Button
         transparent
@@ -35,7 +35,7 @@ export default class FeedDetail extends Component {
     )
   })
 
-  _handleEntryPress = entry => {
+  _handleEntryPress = entry => e => {
     selectEntry(entry)
     this.props.navigation.navigate('EntryDetail')
   }
@@ -43,7 +43,8 @@ export default class FeedDetail extends Component {
   componentWillMount() {
     this.setState({ loading: true })
     fetchFeed(this.props.screenProps.store.selectedFeed.url).then(feed => {
-      this.setState({ loading: false, entry: feed.entry })
+      this.setState({ loading: false })
+      this.setState({ entry: feed.entry })
     })
   }
 
@@ -55,9 +56,9 @@ export default class FeedDetail extends Component {
           {this.state.loading && <ActivityIndicator style={{ margin: 20 }} />}
           <List>
             {entry &&
-              entry.map((e, i) => (
-                <ListItem key={i} onPress={this._handleEntryPress(e)}>
-                  <Text>{e.title}</Text>
+              entry.map((feed, i) => (
+                <ListItem key={i} onPress={this._handleEntryPress(feed)}>
+                  <Text>{feed.title}</Text>
                 </ListItem>
               ))}
           </List>

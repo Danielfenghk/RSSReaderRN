@@ -9,7 +9,7 @@ import {
   Text
 } from 'native-base'
 import { observer } from 'mobx-react/native'
-import { selectFeed } from '../actions'
+import { selectFeed, removeFeed } from '../actions'
 
 @observer
 export default class FeedsList extends Component {
@@ -22,22 +22,26 @@ export default class FeedsList extends Component {
     )
   })
 
-  _handleFeedPress = feed => {
+  _handleFeedPress = feed => e => {
+    console.log('feed', feed)
     selectFeed(feed)
-    this.props.navigations.navigate('FeedDetail', { feedUrl: feed.url })
+    this.props.navigation.navigate('FeedDetail', { feedUrl: feed.url })
   }
 
   render() {
     const { feeds } = this.props.screenProps.store
-
     return (
       <Container>
         <Content>
           <List>
             {feeds &&
               feeds.map((feed, i) => (
-                <ListItem key={i} onPress={this._handleFeedPress(feed)}>
-                  <Text>{feed.title}</Text>
+                <ListItem
+                  key={i}
+                  style={{ margin: 10 }}
+                  onPress={this._handleFeedPress(feed)}
+                >
+                  <Text>{feed.entry[0].category.label || feed.url}</Text>
                 </ListItem>
               ))}
           </List>
