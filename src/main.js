@@ -12,7 +12,7 @@ const Navigator = StackNavigator({
   FeedsList: { screen: FeedsList },
   // FeedDetail: { screen: FeedDetail },
   // EntryDetail: { screen: EntryDetail },
-  // AddFeed: { screen: AddFeed }
+  AddFeed: { screen: AddFeed }
 })
 
 export default class App extends Component {
