@@ -10,8 +10,8 @@ import store from './store'
 
 const Navigator = StackNavigator({
   FeedsList: { screen: FeedsList },
-  // FeedDetail: { screen: FeedDetail },
-  // EntryDetail: { screen: EntryDetail },
+  FeedDetail: { screen: FeedDetail },
+  EntryDetail: { screen: EntryDetail },
   AddFeed: { screen: AddFeed }
 })
 
