@@ -23,7 +23,6 @@ export default class FeedsList extends Component {
   })
 
   _handleFeedPress = feed => e => {
-    console.log('feed', feed)
     selectFeed(feed)
     this.props.navigation.navigate('FeedDetail', { feedUrl: feed.url })
   }
@@ -41,7 +40,9 @@ export default class FeedsList extends Component {
                   style={{ margin: 10 }}
                   onPress={this._handleFeedPress(feed)}
                 >
-                  <Text>{feed.entry[0].category.label || feed.url}</Text>
+                  <Text>
+                    {feed.entry[0] ? feed.entry[0].category.label : feed.url}
+                  </Text>
                 </ListItem>
               ))}
           </List>
